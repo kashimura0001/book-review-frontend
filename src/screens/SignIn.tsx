@@ -14,7 +14,7 @@ export const SignIn = withRouter((props) => {
       .signInWithEmailAndPassword(email, password)
       .then((res) => {
         setLoading(false);
-        props.history.push("");
+        props.history.push("/");
       })
       .catch((error) => {
         setLoading(false);
