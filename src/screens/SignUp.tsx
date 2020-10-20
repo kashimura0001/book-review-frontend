@@ -12,7 +12,8 @@ export const SignUp = withRouter((props) => {
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
-      .then((res) => {
+      .then(({ user }) => {
+        user?.sendEmailVerification();
         setLoading(false);
         props.history.push("/");
       })
