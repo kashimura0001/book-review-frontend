@@ -7,7 +7,7 @@ export const SignUp = withRouter((props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = () => {
+  const onSubmit = () => {
     setLoading(true);
     firebase
       .auth()
@@ -33,7 +33,7 @@ export const SignUp = withRouter((props) => {
         <input type="password" onChange={(e) => setPassword(e.target.value)} />
       </div>
       <div>
-        <button type="submit" onClick={handleSubmit} disabled={loading}>
+        <button type="submit" onClick={onSubmit} disabled={loading}>
           {loading ? "loading..." : "新規登録"}
         </button>
       </div>
