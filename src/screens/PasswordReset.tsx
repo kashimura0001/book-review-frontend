@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import firebase from "../Firebase";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 export const PasswordReset = withRouter((props) => {
   const [email, setEmail] = useState("");
@@ -26,6 +26,9 @@ export const PasswordReset = withRouter((props) => {
         <button type="submit" onClick={onSubmit}>
           送信
         </button>
+      </div>
+      <div>
+        <Link to="/signin">サインイン画面に戻る</Link>
       </div>
     </>
   );
