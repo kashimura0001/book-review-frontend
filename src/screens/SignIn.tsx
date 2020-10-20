@@ -38,6 +38,10 @@ export const SignIn = withRouter((props) => {
       </div>
       ---
       <div>
+        <Link to="/password/reset">パスワードをお忘れの方はこちら</Link>
+      </div>
+      ---
+      <div>
         <Link to="/signup">登録していない方はこちら</Link>
       </div>
     </div>
