@@ -22,31 +22,52 @@ export const SignUp = withRouter(() => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [createUser, { data }] = useMutation(CREATE_USER);
+  const [hasEmailAlreadyInUseError, setHasEmailAlreadyInUseError] = useState(false);
+  const [hasInvalidEmailError, setHasInvalidEmailError] = useState(false);
+  const [hasSignUpError, setHasSignUpError] = useState(false);
 
   const handleCreateUser = async () => {
-    try {
-      setLoading(true);
-      const { user } = await firebase.auth().createUserWithEmailAndPassword(email, password);
-      await createUser({ variables: { name: name, email: email } });
-      await user?.sendEmailVerification();
-      setLoading(false);
-      history.push("/");
-    } catch (e) {
-      console.log(e);
-      setLoading(false);
-      // TODO: Firebaseに既に登録されていたらアカウント登録処理を行うようにする
-      if (e.code === "auth/email-already-in-use") {
-        alert("既に利用されているメールアドレスです。");
-        return;
-      }
+    setLoading(true);
+    setHasEmailAlreadyInUseError(false);
+    setHasInvalidEmailError(false);
+    setHasSignUpError(false);
 
-      alert("登録に失敗しました。");
+    const user = await firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(({ user }) => {
+        return user;
+      })
+      .catch((error) => {
+        if (error.code === "auth/email-already-in-use") setHasEmailAlreadyInUseError(true);
+        if (error.code === "auth/invalid-email") setHasInvalidEmailError(true);
+        return null;
+      });
+
+    if (!user) {
+      setHasSignUpError(true);
+      setLoading(false);
+      return;
     }
+
+    await createUser({ variables: { name: name, email: email } })
+      .then(() => {
+        user.sendEmailVerification();
+        setLoading(false);
+        history.push("/");
+      })
+      .catch(() => {
+        setHasSignUpError(true);
+        setLoading(false);
+      });
   };
 
   return (
     <div>
       <div>新規登録</div>
+      {hasSignUpError && <div>登録に失敗しました。</div>}
+      {hasEmailAlreadyInUseError && <div>既に登録されているメールアドレスです。</div>}
+      {hasInvalidEmailError && <div>不正なメールアドレスです。</div>}
       <div>
         <input type="text" onChange={(e) => setName(e.target.value)} placeholder="名前を入力" />
       </div>
