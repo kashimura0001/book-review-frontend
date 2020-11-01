@@ -8,21 +8,6 @@ export const SignIn = withRouter((props) => {
   const [password, setPassword] = useState("");
   const [hasSignInError, setHasSignInError] = useState(false);
 
-  const onSubmit = () => {
-    setLoading(true);
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then((res) => {
-        setLoading(false);
-        props.history.push("/");
-      })
-      .catch((error) => {
-        setLoading(false);
-        alert(error);
-      });
-  };
-
   const handleSignUp = async () => {
     setLoading(true);
     setHasSignInError(false);
@@ -57,7 +42,7 @@ export const SignIn = withRouter((props) => {
         <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="パスワードを入力" />
       </div>
       <div>
-        <button type="submit" onClick={onSubmit} disabled={loading}>
+        <button type="submit" onClick={handleSignUp} disabled={loading}>
           {loading ? "loading..." : "サインイン"}
         </button>
       </div>
