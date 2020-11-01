@@ -8,7 +8,7 @@ export const SignIn = withRouter((props) => {
   const [password, setPassword] = useState("");
   const [hasSignInError, setHasSignInError] = useState(false);
 
-  const handleSignUp = async () => {
+  const handleSignIn = async () => {
     setLoading(true);
     setHasSignInError(false);
 
@@ -42,7 +42,7 @@ export const SignIn = withRouter((props) => {
         <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="パスワードを入力" />
       </div>
       <div>
-        <button type="submit" onClick={handleSignUp} disabled={loading}>
+        <button type="submit" onClick={handleSignIn} disabled={loading}>
           {loading ? "loading..." : "サインイン"}
         </button>
       </div>
