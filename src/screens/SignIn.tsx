@@ -1,11 +1,26 @@
 import React, { useState } from "react";
 import firebase from "../Firebase";
-import { Link, withRouter } from "react-router-dom";
+import { Link, useHistory, withRouter } from "react-router-dom";
+import { gql, useMutation } from "@apollo/client";
+
+const SIGN_IN = gql`
+  mutation SignIn($email: String!) {
+    signIn(input: { email: $email }) {
+      user {
+        id
+        name
+        email
+      }
+    }
+  }
+`;
 
 export const SignIn = withRouter((props) => {
+  const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [signIn] = useMutation(SIGN_IN);
   const [hasSignInError, setHasSignInError] = useState(false);
 
   const handleSignIn = async () => {
@@ -28,7 +43,23 @@ export const SignIn = withRouter((props) => {
       return;
     }
 
-    // TODO DBに確認する処理を実装する
+    const result = await signIn({ variables: { email: user.email } })
+      .then((result) => {
+        return result;
+      })
+      .catch(() => {
+        return null;
+      });
+
+    if (!result) {
+      await firebase.auth().signOut();
+      setHasSignInError(true);
+      setLoading(false);
+      return;
+    }
+
+    setLoading(false);
+    history.push("/");
   };
 
   return (
