@@ -16,26 +16,22 @@ const GET_CURRENT_USER = gql`
 export const Auth: FC<{ children: any }> = ({ children }) => {
   const [isCheckCompleted, setIsCheckCompleted] = useState(false);
   const [isSignedIn, setIsSignedIn] = useState(false);
-  const [isRegisteredProfile, setIsRegisteredProfile] = useState(false);
+  const { loading, data, refetch } = useQuery(GET_CURRENT_USER);
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => setIsSignedIn(!!user));
-    const { error, data } = useQuery(GET_CURRENT_USER);
-    setIsRegisteredProfile(!!data);
-    setIsCheckCompleted(true);
+    return firebase.auth().onAuthStateChanged(async (user) => {
+      if (user) {
+        setIsSignedIn(true);
+        await refetch();
+      } else {
+        setIsSignedIn(false);
+      }
+      setIsCheckCompleted(true);
+    });
   }, []);
 
-  if (!isCheckCompleted) {
-    return <p>Loading...</p>;
-  }
-
-  if (!isSignedIn) {
-    return <Redirect to="signin" />;
-  }
-
-  if (isRegisteredProfile) {
-    return children;
-  } else {
-    return <Redirect to="/profile/register" />;
-  }
+  if (!isCheckCompleted || loading) return <p>Loading...</p>;
+  if (!isSignedIn) return <Redirect to="signin" />;
+  if (isSignedIn && data?.currentUser) return children;
+  if (isSignedIn && !data?.currentUser) return <Redirect to="/profile/register" />;
 };
