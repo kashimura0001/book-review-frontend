@@ -6,6 +6,7 @@ import { SignIn } from "./screens/SignIn";
 import { SignUp } from "./screens/SignUp";
 import { Auth } from "./Auth";
 import { PasswordReset } from "./screens/PasswordReset";
+import { RegisterProfile } from "./screens/RegisterProfile";
 
 export const App = () => {
   return (
@@ -13,6 +14,7 @@ export const App = () => {
       <Route exact path="/signin" component={SignIn} />
       <Route exact path="/signup" component={SignUp} />
       <Route exact path="/password/reset" component={PasswordReset} />
+      <Route exact path="/profile/register" component={RegisterProfile} />
       <Auth>
         <Switch>
           <Route exact path="/" component={Home} />
