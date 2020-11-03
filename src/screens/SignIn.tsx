@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import firebase from "../Firebase";
 import { Link, useHistory, withRouter } from "react-router-dom";
-import { gql, useMutation } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 
-const SIGN_IN = gql`
-  mutation SignIn($email: String!) {
-    signIn(input: { email: $email }) {
-      user {
-        id
-        name
-        email
-      }
+const GET_CURRENT_USER = gql`
+  query GetCurrentUser {
+    currentUser {
+      id
+      email
+      name
     }
   }
 `;
@@ -20,38 +18,23 @@ export const SignIn = withRouter((props) => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [signIn] = useMutation(SIGN_IN);
   const [hasSignInError, setHasSignInError] = useState(false);
 
   const handleSignIn = async () => {
     setLoading(true);
     setHasSignInError(false);
 
-    const user = await firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(({ user }) => {
-        return user;
-      })
-      .catch(() => {
-        return null;
-      });
-
-    if (!user) {
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, password);
+    } catch (e) {
       setHasSignInError(true);
       setLoading(false);
       return;
     }
 
-    const result = await signIn({ variables: { email: user.email } })
-      .then((result) => {
-        return result;
-      })
-      .catch(() => {
-        return null;
-      });
+    const { error, data } = await useQuery(GET_CURRENT_USER);
 
-    if (!result) {
+    if (error) {
       await firebase.auth().signOut();
       setHasSignInError(true);
       setLoading(false);
@@ -59,7 +42,7 @@ export const SignIn = withRouter((props) => {
     }
 
     setLoading(false);
-    history.push("/");
+    history.push(data ? "/" : "/profile/register");
   };
 
   return (
