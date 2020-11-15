@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import firebase from "../Firebase";
-import { withRouter, useHistory } from "react-router-dom";
+import { withRouter, useHistory, Redirect } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
 
 const SIGN_UP = gql`
@@ -8,8 +8,6 @@ const SIGN_UP = gql`
     signUp(input: { token: $token, name: $name, email: $email }) {
       user {
         id
-        name
-        email
       }
     }
   }
@@ -17,35 +15,39 @@ const SIGN_UP = gql`
 
 export const RegisterProfile = withRouter(() => {
   const history = useHistory();
-  const [loading, setLoading] = useState(false);
-  const [name, setName] = useState("");
   const [signUp] = useMutation(SIGN_UP);
+  const [loading, setLoading] = useState(false);
+  const [currentUser, setCurrentUser] = useState<firebase.User | null>(null);
+  const [hasFetchedUser, setHasFetchedUser] = useState(false);
+  const [name, setName] = useState("");
   const [hasRegisterProfileError, setHasRegisterProfileError] = useState(false);
 
-  const [user, setUser] = useState<firebase.User | null>(null);
-
   useEffect(() => {
-    return firebase.auth().onAuthStateChanged((user) => setUser(user));
+    setHasFetchedUser(false);
+    return firebase.auth().onAuthStateChanged((user) => {
+      setCurrentUser(user);
+      setHasFetchedUser(true);
+    });
   }, []);
-
-  // TODO Firebase認証が完了していない場合はサインイン画面にリダイレクトする処理を追加する
 
   const handleRegisterProfile = async () => {
     setHasRegisterProfileError(false);
     setLoading(true);
-    const email = user?.email;
-    const token = await user?.getIdToken(true);
+    const email = currentUser?.email;
+    const token = await currentUser?.getIdToken(true);
     try {
       await signUp({ variables: { token, name, email } });
-      user?.sendEmailVerification();
+      currentUser?.sendEmailVerification();
       setLoading(false);
       history.push("/");
     } catch (e) {
-      console.log(e);
       setHasRegisterProfileError(true);
       setLoading(false);
     }
   };
+
+  if (!hasFetchedUser) return <div>loading...</div>;
+  if (!currentUser) return <Redirect to="/signIn" />;
 
   return (
     <div>
@@ -55,7 +57,7 @@ export const RegisterProfile = withRouter(() => {
         <input type="text" onChange={(e) => setName(e.target.value)} placeholder="名前を入力" />
       </div>
       <div>
-        <input type="text" value={user?.email || ""} disabled />
+        <input type="text" value={currentUser?.email || ""} disabled />
       </div>
       <button type="button" onClick={handleRegisterProfile} disabled={loading}>
         {loading ? "loading..." : "登録"}
