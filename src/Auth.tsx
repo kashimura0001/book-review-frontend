@@ -37,7 +37,7 @@ export const Auth: FC<{ children: any }> = ({ children }) => {
   }, []);
 
   if (loading) return <p>Loading...</p>;
-  if (!hasUser) return <Redirect to="signIn" />;
+  if (!hasUser) return <Redirect to="/signIn" />;
   if (hasUser && isProfileRegistered) return children;
   if (hasUser && !isProfileRegistered) return <Redirect to="/profile/register" />;
 };
