@@ -34,7 +34,7 @@ export const RegisterProfile = withRouter(() => {
     setHasRegisterProfileError(false);
     setLoading(true);
     const email = user?.email;
-    const token = user?.getIdToken(true);
+    const token = await user?.getIdToken(true);
     try {
       await signUp({ variables: { token, name, email } });
       user?.sendEmailVerification();
