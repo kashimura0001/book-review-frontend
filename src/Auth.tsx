@@ -22,7 +22,7 @@ export const Auth: FC<{ children: any }> = ({ children }) => {
   useEffect(() => {
     return firebase.auth().onAuthStateChanged(async (user) => {
       if (!user) {
-        setHasUser(false)
+        setHasUser(false);
         setLoading(false);
         return;
       }
@@ -30,7 +30,7 @@ export const Auth: FC<{ children: any }> = ({ children }) => {
       setLoading(true);
       setHasUser(true);
       await signIn()
-        .then(({ data }) => setIsProfileRegistered(!!data.user))
+        .then(({ data }) => setIsProfileRegistered(!!data.signInUser.user))
         .catch((error) => console.log(error));
       setLoading(false);
     });
