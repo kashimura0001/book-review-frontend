@@ -1,43 +1,24 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import { Redirect } from "react-router-dom";
-import firebase from "./Firebase";
-import { gql, useMutation } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
+import { useAuth } from "./common/provider/AuthProvider";
 
-const SIGN_IN = gql`
-  mutation signInUser {
-    signInUser(input: {}) {
-      user {
-        id
-      }
+const FETCH_CURRENT_USER = gql`
+  query fetchCurrentUser {
+    currentUser {
+      id
+      email
+      name
     }
   }
 `;
 
 export const Auth: FC<{ children: any }> = ({ children }) => {
-  const [signIn] = useMutation(SIGN_IN);
-  const [loading, setLoading] = useState(true);
-  const [hasUser, setHasUser] = useState(false);
-  const [isProfileRegistered, setIsProfileRegistered] = useState(false);
+  const { user } = useAuth();
+  const { data, loading } = useQuery(FETCH_CURRENT_USER);
 
-  useEffect(() => {
-    return firebase.auth().onAuthStateChanged(async (user) => {
-      if (!user) {
-        setHasUser(false);
-        setLoading(false);
-        return;
-      }
-
-      setLoading(true);
-      setHasUser(true);
-      await signIn()
-        .then(({ data }) => setIsProfileRegistered(!!data.signInUser.user))
-        .catch((error) => console.log(error));
-      setLoading(false);
-    });
-  }, []);
-
-  if (loading) return <p>Loading...</p>;
-  if (!hasUser) return <Redirect to="/signIn" />;
-  if (hasUser && isProfileRegistered) return children;
-  if (hasUser && !isProfileRegistered) return <Redirect to="/profile/register" />;
+  if (loading) return <div>loading...</div>;
+  if (!user) return <Redirect to="/signIn" />;
+  if (user && data.currentUser) return children;
+  if (user && !data.currentUser) return <Redirect to="/profile/register" />;
 };

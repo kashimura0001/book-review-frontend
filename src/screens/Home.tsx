@@ -1,13 +1,9 @@
 import React from "react";
-import firebase from "../Firebase";
 import { Link } from "react-router-dom";
+import { useAuth } from "../common/provider/AuthProvider";
 
 export const Home = () => {
-  const user = firebase.auth().currentUser;
-
-  const signOut = () => {
-    firebase.auth().signOut();
-  };
+  const { user, signOut } = useAuth();
 
   const sendEmailVerification = () => {
     user
