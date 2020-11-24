@@ -17,6 +17,8 @@ export const Auth: FC<{ children: any }> = ({ children }) => {
   const { user } = useAuth();
   const { data, loading } = useQuery(FETCH_CURRENT_USER);
 
+  console.log(data)
+
   if (loading) return <div>loading...</div>;
   if (!user) return <Redirect to="/signIn" />;
   if (user && data.currentUser) return children;
