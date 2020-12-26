@@ -15,9 +15,10 @@ const FETCH_CURRENT_USER = gql`
 
 export const Auth: FC<{ children: any }> = ({ children }) => {
   const { user } = useAuth();
-  const { data, loading } = useQuery(FETCH_CURRENT_USER);
+  const { data, loading, error } = useQuery(FETCH_CURRENT_USER);
 
   if (loading) return <div>loading...</div>;
+  if (error) return <div>Error...</div>;
   if (!user) return <Redirect to="/signIn" />;
   if (user && data.currentUser) return children;
   if (user && !data.currentUser) return <Redirect to="/profile/register" />;
