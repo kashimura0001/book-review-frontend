@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../common/provider/AuthProvider";
 
-export const Home = () => {
+export const HomeScreen = () => {
   const { user, signOut } = useAuth();
 
   const sendEmailVerification = () => {
@@ -30,6 +30,19 @@ export const Home = () => {
         <Link to="/profile">Profileへ</Link>
       </div>
       <button onClick={signOut}>サインアウト</button>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <button
+        onClick={async () => {
+          const idToken = await user?.getIdToken(true);
+          console.log(idToken);
+        }}
+      >
+        IDトークンを取得する
+      </button>
     </div>
   );
 };

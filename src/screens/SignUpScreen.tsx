@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, withRouter, useHistory, Redirect } from "react-router-dom";
 import { useAuth } from "../common/provider/AuthProvider";
 
-export const SignUp = withRouter(() => {
+export const SignUpScreen = withRouter(() => {
   const history = useHistory();
   const { user, signUpWithEmailAndPassword } = useAuth();
   const [loading, setLoading] = useState(false);

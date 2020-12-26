@@ -13,7 +13,7 @@ const CREATE_USER = gql`
   }
 `;
 
-export const RegisterProfile = withRouter(() => {
+export const RegisterProfileScreen = withRouter(() => {
   const history = useHistory();
   const { user } = useAuth();
   const [createUser] = useMutation(CREATE_USER);

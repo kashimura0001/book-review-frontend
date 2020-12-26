@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import firebase from "../Firebase";
 import { Link, withRouter } from "react-router-dom";
 
-export const PasswordReset = withRouter((props) => {
+export const PasswordResetScreen = withRouter((props) => {
   const [email, setEmail] = useState("");
 
   const onSubmit = () => {
