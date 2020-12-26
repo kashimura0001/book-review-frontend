@@ -8,6 +8,7 @@ import { Auth } from "./Auth";
 import { PasswordResetScreen } from "./screens/PasswordResetScreen";
 import { RegisterProfileScreen } from "./screens/RegisterProfileScreen";
 import { ProvideAuth } from "./common/provider/AuthProvider";
+import { TeamsScreen } from "./screens/TeamsScreen";
 
 export const App = () => {
   return (
@@ -19,9 +20,11 @@ export const App = () => {
         <Route exact path="/profile/register" component={RegisterProfileScreen} />
         <Auth>
           <Switch>
-            <Route exact path="/" component={HomeScreen} />
-            <Route exact path="/profile" component={ProfileScreen} />
-            <Route render={() => <p>not found.</p>} />
+            <>
+              <Route exact path="/teams" component={TeamsScreen} />
+              <Route exact path="/" component={HomeScreen} />
+              <Route exact path="/profile" component={ProfileScreen} />
+            </>
           </Switch>
         </Auth>
       </Switch>
