@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import firebase from "../Firebase";
 import { Link, withRouter } from "react-router-dom";
+import { SignInPath } from "../routes";
 
 export const PasswordResetScreen = withRouter((props) => {
   const [email, setEmail] = useState("");
@@ -10,7 +11,7 @@ export const PasswordResetScreen = withRouter((props) => {
       .auth()
       .sendPasswordResetEmail(email)
       .then(() => {
-        props.history.push("/signin");
+        props.history.push(SignInPath);
       })
       .catch(() => {
         alert("送信に失敗しました");
@@ -28,7 +29,7 @@ export const PasswordResetScreen = withRouter((props) => {
         </button>
       </div>
       <div>
-        <Link to="/signin">サインイン画面に戻る</Link>
+        <Link to={SignInPath}>サインイン画面に戻る</Link>
       </div>
     </>
   );

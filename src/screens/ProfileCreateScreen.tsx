@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { withRouter, useHistory, Redirect } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
 import { useAuth } from "../common/provider/AuthProvider";
+import { SignInPath } from "../routes";
 
 const CREATE_USER = gql`
   mutation createUser($token: String!, $name: String!, $email: String!) {
@@ -13,7 +14,7 @@ const CREATE_USER = gql`
   }
 `;
 
-export const RegisterProfileScreen = withRouter(() => {
+export const ProfileCreateScreen = withRouter(() => {
   const history = useHistory();
   const { user } = useAuth();
   const [createUser] = useMutation(CREATE_USER);
@@ -21,7 +22,7 @@ export const RegisterProfileScreen = withRouter(() => {
   const [hasError, setHasError] = useState(false);
   const [name, setName] = useState("");
 
-  if (!user) return <Redirect to="/signIn" />;
+  if (!user) return <Redirect to={SignInPath} />;
 
   const handleRegisterProfile = async () => {
     setLoading(true);

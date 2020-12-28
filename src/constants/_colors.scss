@@ -1,0 +1,25 @@
+//pallet
+$blue: #3da9fc;
+$lightBlue: #d8eefe;
+$white: #ffffff;
+$darkGray: #333333;
+$gray: #5f6c7b;
+$lightGray: #aaaaaa;
+$red: #ef4565;
+
+//Semantic
+$link: $blue;
+$notice: $lightBlue;
+$defaultText: $darkGray;
+$subText: $gray;
+$errorText: $red;
+$whiteText: $white;
+$placeholder: $lightGray;
+$primaryButton: $blue;
+$primaryButtonHover: darken($primaryButton, 10%);
+$primaryButtonDisabled: lighten($primaryButton, 15%);
+$whiteButton: $white;
+$whiteButtonHover: darken($whiteButton, 10%);
+$whiteButtonDisabled: darken($whiteButton, 20%);
+$errorButton: $red;
+$grayBorder: $lightGray;

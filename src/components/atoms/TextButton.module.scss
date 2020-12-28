@@ -1,0 +1,19 @@
+@import "../../constants/colors.scss";
+
+@mixin textButton {
+  color: $defaultText;
+  outline: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.defaultTextButton {
+  @include textButton;
+}
+
+.primaryTextButton {
+  @include textButton;
+  color: $link;
+}

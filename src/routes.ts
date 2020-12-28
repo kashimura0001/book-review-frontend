@@ -1,0 +1,12 @@
+export const SignInPath = "/signin";
+export const SignUpPath = "/singup";
+export const PasswordResetPath = "/password/reset";
+export const ProfilePath = "/profile";
+export const ProfileNewPath = "/profile/new";
+export const HomePath = "/home";
+export const ReviewsPath = "teams/:teamId/reviews";
+export const ReviewDetailPath = "teams/:teamId/reviews/:reviewId";
+export const ReviewNewPath = "teams/:teamId/reviews/new";
+export const MembersPath = "teams/:teamId/members";
+export const MemberDetailPath = "teams/:teamId/members/:memberId";
+export const SettingPath = "teams/:teamId/setting";

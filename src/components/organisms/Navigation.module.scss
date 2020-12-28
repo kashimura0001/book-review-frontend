@@ -1,0 +1,45 @@
+@import "../../constants/colors.scss";
+
+.header {
+  align-items: center;
+  border: 1px solid $grayBorder;
+  display: flex;
+  height: 60px;
+  padding: 0 8px;
+}
+
+.logo {
+  color: $defaultText;
+  font-size: 24px;
+  font-weight: 900;
+  margin-right: 20px;
+}
+
+.navigationButtons {
+  align-items: center;
+  display: flex;
+}
+
+.navigationItem {
+  font-size: 18px;
+  margin: 0 15px;
+}
+
+.navigationActions {
+  align-items: center;
+  display: flex;
+  margin-left: auto;
+}
+
+.createReviewButton {
+  margin: 0 10px;
+}
+
+.noticeBar {
+  align-items: center;
+  background-color: $notice;
+  color: $defaultText;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+}

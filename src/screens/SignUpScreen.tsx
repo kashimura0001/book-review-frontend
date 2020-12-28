@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, withRouter, useHistory, Redirect } from "react-router-dom";
 import { useAuth } from "../common/provider/AuthProvider";
+import { SignInPath, HomePath, ProfileNewPath } from "../routes";
 
 export const SignUpScreen = withRouter(() => {
   const history = useHistory();
@@ -12,7 +13,7 @@ export const SignUpScreen = withRouter(() => {
   const [hasInvalidEmailError, setHasInvalidEmailError] = useState(false);
   const [hasSignUpError, setHasSignUpError] = useState(false);
 
-  if (user) return <Redirect to="/" />;
+  if (user) return <Redirect to={HomePath} />;
 
   const resetErrorStatuses = () => {
     setHasEmailAlreadyInUseError(false);
@@ -26,7 +27,7 @@ export const SignUpScreen = withRouter(() => {
 
     try {
       await signUpWithEmailAndPassword(email, password);
-      history.push("/profile/register");
+      history.push(ProfileNewPath);
     } catch (e) {
       if (e.code === "auth/email-already-in-use") setHasEmailAlreadyInUseError(true);
       if (e.code === "auth/invalid-email") setHasInvalidEmailError(true);
@@ -54,7 +55,7 @@ export const SignUpScreen = withRouter(() => {
       </div>
       ---
       <div>
-        <Link to="/signin">サインインはこちら</Link>
+        <Link to={SignInPath}>サインインはこちら</Link>
       </div>
     </div>
   );

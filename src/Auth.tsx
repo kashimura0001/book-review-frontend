@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { Redirect } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
 import { useAuth } from "./common/provider/AuthProvider";
+import { SignInPath, ProfileNewPath } from "./routes";
 
 const FETCH_CURRENT_USER = gql`
   query fetchCurrentUser {
@@ -19,7 +20,7 @@ export const Auth: FC<{ children: any }> = ({ children }) => {
 
   if (loading) return <div>loading...</div>;
   if (error) return <div>Error...</div>;
-  if (!user) return <Redirect to="/signIn" />;
+  if (!user) return <Redirect to={SignInPath} />;
   if (user && data.currentUser) return children;
-  if (user && !data.currentUser) return <Redirect to="/profile/register" />;
+  if (user && !data.currentUser) return <Redirect to={ProfileNewPath} />;
 };

@@ -1,0 +1,40 @@
+@import "../../constants/colors.scss";
+
+@mixin button {
+  align-items: center;
+  border-radius: 10px;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  outline: none;
+  width: 150px;
+}
+
+.white {
+  @include button;
+  background-color: $whiteButton;
+  border: 2px solid $grayBorder;
+  color: $defaultText;
+
+  &:hover {
+    background-color: $whiteButtonHover;
+  }
+
+  &:disabled {
+    background-color: $whiteButtonDisabled;
+  }
+}
+
+.primary {
+  @include button;
+  background-color: $primaryButton;
+  color: $whiteText;
+
+  &:hover {
+    background-color: $primaryButtonHover;
+  }
+
+  &:disabled {
+    background-color: $primaryButtonDisabled;
+  }
+}

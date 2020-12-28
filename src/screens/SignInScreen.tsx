@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory, withRouter, Redirect } from "react-router-dom";
 import { useAuth } from "../common/provider/AuthProvider";
+import { PasswordResetPath, SignUpPath, HomePath } from "../routes";
 
 export const SignInScreen = withRouter(() => {
   const history = useHistory();
@@ -10,7 +11,7 @@ export const SignInScreen = withRouter(() => {
   const [password, setPassword] = useState("");
   const [hasSignInError, setHasSignInError] = useState(false);
 
-  if (user) return <Redirect to="/" />;
+  if (user) return <Redirect to={HomePath} />;
 
   const handleSignIn = async () => {
     setLoading(true);
@@ -19,7 +20,7 @@ export const SignInScreen = withRouter(() => {
     try {
       await signInWithEmailAndPassword(email, password);
       setLoading(false);
-      history.push("/");
+      history.push(HomePath);
     } catch (e) {
       setHasSignInError(true);
       setLoading(false);
@@ -44,11 +45,11 @@ export const SignInScreen = withRouter(() => {
       </div>
       ---
       <div>
-        <Link to="/password/reset">パスワードをお忘れの方はこちら</Link>
+        <Link to={PasswordResetPath}>パスワードをお忘れの方はこちら</Link>
       </div>
       ---
       <div>
-        <Link to="/signup">登録していない方はこちら</Link>
+        <Link to={SignUpPath}>登録していない方はこちら</Link>
       </div>
     </div>
   );
