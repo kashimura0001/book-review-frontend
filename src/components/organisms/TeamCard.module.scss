@@ -1,0 +1,26 @@
+@import "../../constants/colors";
+
+.container {
+  background-color: $teamCard;
+  border: 1px solid $grayBorder;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 20px;
+  height: 120px;
+
+  &:hover {
+    background-color: $teamCardHover;
+  }
+}
+
+.name {
+  color: $defaultText;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.memberCount {
+  color: $subText;
+  font-size: 16px;
+  padding-top: 10px;
+}

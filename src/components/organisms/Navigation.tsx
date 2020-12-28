@@ -47,6 +47,8 @@ export const Navigation = () => {
               レビューを書く
             </Button>
           )}
+          {/* TODO あとで削除する */}
+          <button onClick={async () => console.log(await user?.getIdToken(true))}>Get auth token　　</button>
           {/* TODO あとでアイコンに変更する */}
           <button onClick={signOut}>サインアウト</button>
         </div>

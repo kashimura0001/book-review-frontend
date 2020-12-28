@@ -1,25 +1,48 @@
 import React from "react";
-import { useAuth } from "../common/provider/AuthProvider";
+import styles from "./HomeScreen.module.scss";
+import { Button } from "../components/atoms/Button";
+import { TeamCard } from "../components/organisms/TeamCard";
+
+// TODO あとで消す
+const teams = [
+  {
+    name: "リフカム",
+    membersCount: 23,
+  },
+  {
+    name: "リフカム",
+    membersCount: 23,
+  },
+  {
+    name: "リフカム",
+    membersCount: 23,
+  },
+  {
+    name: "リフカム",
+    membersCount: 23,
+  },
+];
 
 export const HomeScreen = () => {
-  const { user } = useAuth();
-
   return (
-    <div>
-      <div>ホーム</div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <button
-        onClick={async () => {
-          const idToken = await user?.getIdToken(true);
-          console.log(idToken);
-        }}
-      >
-        IDトークンを取得する
-      </button>
+    <div className={styles.container}>
+      <div className={styles.contentAll}>
+        <div className={styles.header}>
+          <div className={styles.title}>チームリスト</div>
+          <Button theme="primary" onClick={() => null}>
+            チーム作成する
+          </Button>
+        </div>
+        <div className={styles.teams}>
+          {teams.map((team, index) => {
+            return (
+              <div className={styles.teamCard}>
+                <TeamCard name={team.name} memberCount={team.membersCount} onClick={() => null} />
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 };
