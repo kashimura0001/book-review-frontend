@@ -40,21 +40,19 @@ export const App = () => {
         <Route exact path={PasswordResetPath} component={PasswordResetScreen} />
         <Route exact path={ProfileNewPath} component={ProfileCreateScreen} />
         <Auth>
+          <Navigation />
           <Switch>
-            <>
-              <Navigation />
-              <Route exact path={"/"}>
-                <Redirect to={HomePath} />
-              </Route>
-              <Route exact path={HomePath} component={HomeScreen} />
-              <Route exact path={ProfilePath} component={ProfileScreen} />
-              <Route exact path={ReviewsPath} component={ReviewsScreen} />
-              <Route exact path={ReviewDetailPath} component={ReviewDetailScreen} />
-              <Route exact path={ReviewNewPath} component={ReviewCreateScreen} />
-              <Route exact path={MembersPath} component={MembersScreen} />
-              <Route exact path={MemberDetailPath} component={MemberDetailScreen} />
-              <Route exact path={SettingPath} component={SettingScreen} />
-            </>
+            <Route exact path={HomePath} component={HomeScreen} />
+            <Route exact path={ProfilePath} component={ProfileScreen} />
+            <Route exact path={ReviewsPath} component={ReviewsScreen} />
+            <Route exact path={ReviewDetailPath} component={ReviewDetailScreen} />
+            <Route exact path={ReviewNewPath} component={ReviewCreateScreen} />
+            <Route exact path={MembersPath} component={MembersScreen} />
+            <Route exact path={MemberDetailPath} component={MemberDetailScreen} />
+            <Route exact path={SettingPath} component={SettingScreen} />
+            <Route exact path="*">
+              <Redirect to={HomePath} />
+            </Route>
           </Switch>
         </Auth>
       </Switch>
