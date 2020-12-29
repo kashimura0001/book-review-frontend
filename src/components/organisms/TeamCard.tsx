@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import styles from "./TeamCard.module.scss";
+import { NormalText, BoldText } from "../atoms/Text";
 
 type Props = {
   name: string;
@@ -10,8 +11,10 @@ type Props = {
 export const TeamCard: FC<Props> = ({ name, memberCount, onClick }) => {
   return (
     <div className={styles.container} onClick={onClick}>
-      <div className={styles.name}>{name}</div>
-      <div className={styles.memberCount}>メンバー： {memberCount}人</div>
+      <BoldText className={styles.name}>{name}</BoldText>
+      <div className={styles.memberCountWrapper}>
+        <NormalText>メンバー： {memberCount}人</NormalText>
+      </div>
     </div>
   );
 };

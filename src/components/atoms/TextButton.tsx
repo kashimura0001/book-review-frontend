@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { MouseEvent, FC } from "react";
 import styles from "./TextButton.module.scss";
 import cn from "classnames";
 
@@ -15,12 +15,18 @@ const getTextButtonThemeStyle = (theme: TextButtonTheme | undefined) => {
 };
 
 type Props = {
+  id?: string;
+  name?: string;
   theme?: TextButtonTheme;
   className?: string;
-  onClick: () => void;
+  onClick: (e: MouseEvent<HTMLButtonElement>) => void;
 };
 
-export const TextButton: FC<Props> = ({ theme, className, children }) => {
+export const TextButton: FC<Props> = ({ id, name, theme, className, onClick, children }) => {
   const textButtonTheme = getTextButtonThemeStyle(theme);
-  return <button className={cn(textButtonTheme, className)}>{children}</button>;
+  return (
+    <button id={id} name={name} className={cn(textButtonTheme, className)} onClick={onClick}>
+      {children}
+    </button>
+  );
 };

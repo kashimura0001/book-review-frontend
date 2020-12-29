@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, MouseEvent } from "react";
 import cn from "classnames";
 import styles from "./Button.module.scss";
 
@@ -7,24 +7,26 @@ type ButtonTheme = "default" | "primary";
 const getButtonThemeStyle = (theme: ButtonTheme | undefined) => {
   switch (theme) {
     case "primary":
-      return styles.primary;
+      return styles.primaryButton;
     case "default":
     default:
-      return styles.white;
+      return styles.defaultButton;
   }
 };
 
 type Props = {
+  id?: string;
+  name?: string;
   theme?: ButtonTheme;
   className?: string;
   disabled?: boolean;
-  onClick: () => void;
+  onClick: (e: MouseEvent<HTMLButtonElement>) => void;
 };
 
-export const Button: FC<Props> = ({ theme, className, disabled, onClick, children }) => {
+export const Button: FC<Props> = ({ id, name, theme, className, disabled, onClick, children }) => {
   const buttonStyle = getButtonThemeStyle(theme);
   return (
-    <button onClick={onClick} className={cn(buttonStyle, className)} disabled={disabled}>
+    <button id={id} name={name} className={cn(buttonStyle, className)} disabled={disabled} onClick={onClick}>
       {children}
     </button>
   );

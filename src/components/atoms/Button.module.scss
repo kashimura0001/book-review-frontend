@@ -4,28 +4,29 @@
   align-items: center;
   border-radius: 10px;
   display: flex;
+  font-weight: bold;
   height: 40px;
   justify-content: center;
   outline: none;
   width: 150px;
 }
 
-.white {
+.defaultButton {
   @include button;
-  background-color: $whiteButton;
+  background-color: $defaultButton;
   border: 2px solid $grayBorder;
   color: $defaultText;
 
   &:hover {
-    background-color: $whiteButtonHover;
+    background-color: $defaultButtonHover;
   }
 
   &:disabled {
-    background-color: $whiteButtonDisabled;
+    background-color: $defaultButtonDisabled;
   }
 }
 
-.primary {
+.primaryButton {
   @include button;
   background-color: $primaryButton;
   color: $whiteText;

@@ -1,0 +1,18 @@
+@import "../../constants/colors";
+
+.textBox {
+  border: 1px solid $grayBorder;
+  border-radius: 10px;
+  height: 50px;
+  outline: none;
+  padding: 20px;
+  width: 100%;
+
+  &::placeholder {
+    color: $placeholder;
+  }
+
+  &:focus {
+    border: 1px solid $blueBorder;
+  }
+}

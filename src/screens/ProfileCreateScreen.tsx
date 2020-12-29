@@ -3,6 +3,9 @@ import { withRouter, useHistory, Redirect } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
 import { useAuth } from "../common/provider/AuthProvider";
 import { SignInPath } from "../routes";
+import { BoldText } from "../components/atoms/Text";
+import { TextBox } from "../components/atoms/TextBox";
+import { Button } from "../components/atoms/Button";
 
 const CREATE_USER = gql`
   mutation createUser($token: String!, $name: String!, $email: String!) {
@@ -41,17 +44,17 @@ export const ProfileCreateScreen = withRouter(() => {
 
   return (
     <div>
-      <div>基本データを登録</div>
-      {hasError && <div>登録に失敗しました。</div>}
+      <BoldText>基本データを登録</BoldText>
+      {hasError && <BoldText>登録に失敗しました。</BoldText>}
       <div>
-        <input type="text" onChange={(e) => setName(e.target.value)} placeholder="名前を入力" />
+        <TextBox onChange={(e) => setName(e.target.value)} placeholder="名前を入力" />
       </div>
       <div>
-        <input type="text" value={user?.email || ""} disabled />
+        <TextBox value={user?.email || ""} disabled />
       </div>
-      <button type="button" onClick={handleRegisterProfile} disabled={loading}>
+      <Button theme="primary" onClick={handleRegisterProfile} disabled={loading}>
         {loading ? "loading..." : "登録"}
-      </button>
+      </Button>
     </div>
   );
 });

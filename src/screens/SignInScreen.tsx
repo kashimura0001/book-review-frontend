@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Link, useHistory, withRouter, Redirect } from "react-router-dom";
 import { useAuth } from "../common/provider/AuthProvider";
 import { PasswordResetPath, SignUpPath, HomePath } from "../routes";
+import { BoldText } from "../components/atoms/Text";
+import { TextBox } from "../components/atoms/TextBox";
+import { Button } from "../components/atoms/Button";
 
 export const SignInScreen = withRouter(() => {
   const history = useHistory();
@@ -30,18 +33,18 @@ export const SignInScreen = withRouter(() => {
 
   return (
     <div>
-      <div>サインイン</div>
-      {hasSignInError && <div>サインインに失敗しました。</div>}
+      <BoldText>サインイン</BoldText>
+      {hasSignInError && <BoldText>サインインに失敗しました。</BoldText>}
       <div>
-        <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="メールアドレスを入力" />
+        <TextBox onChange={(e) => setEmail(e.target.value)} placeholder="メールアドレスを入力" />
       </div>
       <div>
-        <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="パスワードを入力" />
+        <TextBox type="password" onChange={(e) => setPassword(e.target.value)} placeholder="パスワードを入力" />
       </div>
       <div>
-        <button type="submit" onClick={handleSignIn} disabled={loading}>
+        <Button theme="primary" onClick={handleSignIn} disabled={loading}>
           {loading ? "loading..." : "サインイン"}
-        </button>
+        </Button>
       </div>
       ---
       <div>

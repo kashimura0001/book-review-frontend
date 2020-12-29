@@ -5,6 +5,7 @@ import { Button } from "../atoms/Button";
 import { TextButton } from "../atoms/TextButton";
 import { HomePath, ProfilePath } from "../../routes";
 import styles from "./Navigation.module.scss";
+import { BoldText } from "../atoms/Text";
 
 const isHideNavigationButtonsPath = (pathName: string) => {
   return [HomePath, ProfilePath].includes(pathName);
@@ -30,7 +31,7 @@ export const Navigation = () => {
   return (
     <>
       <div className={styles.header}>
-        <span className={styles.logo}>Bukure</span>
+        <BoldText className={styles.logo}>Bukure</BoldText>
         {isShowNavigationButtons && (
           <>
             <TextButton className={styles.navigationItem} onClick={() => null}>

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import firebase from "../Firebase";
 import { Link, withRouter } from "react-router-dom";
 import { SignInPath } from "../routes";
+import { Button } from "../components/atoms/Button";
+import { TextBox } from "../components/atoms/TextBox";
 
 export const PasswordResetScreen = withRouter((props) => {
   const [email, setEmail] = useState("");
@@ -21,12 +23,12 @@ export const PasswordResetScreen = withRouter((props) => {
   return (
     <>
       <div>
-        <input type="text" onChange={(e) => setEmail(e.target.value)} />
+        <TextBox onChange={(e) => setEmail(e.target.value)} placeholder="パスワードを入力..." />
       </div>
       <div>
-        <button type="submit" onClick={onSubmit}>
+        <Button theme="primary" onClick={onSubmit}>
           送信
-        </button>
+        </Button>
       </div>
       <div>
         <Link to={SignInPath}>サインイン画面に戻る</Link>

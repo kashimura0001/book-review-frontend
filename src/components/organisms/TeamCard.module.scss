@@ -2,7 +2,7 @@
 
 .container {
   background-color: $teamCard;
-  border: 1px solid $grayBorder;
+  border: 2px solid $grayBorder;
   border-radius: 10px;
   cursor: pointer;
   padding: 20px;
@@ -14,13 +14,9 @@
 }
 
 .name {
-  color: $defaultText;
   font-size: 18px;
-  font-weight: 700;
 }
 
-.memberCount {
-  color: $subText;
-  font-size: 16px;
-  padding-top: 10px;
+.memberCountWrapper {
+  margin-top: 15px;
 }

@@ -10,18 +10,18 @@ $red: #ef4565;
 //Semantic
 $link: $blue;
 $notice: $lightBlue;
-$defaultText: $darkGray;
-$subText: $gray;
-$errorText: $red;
+$defaultText: $gray;
+$dangerText: $red;
 $whiteText: $white;
 $placeholder: $lightGray;
 $primaryButton: $blue;
 $primaryButtonHover: darken($primaryButton, 10%);
 $primaryButtonDisabled: lighten($primaryButton, 15%);
-$whiteButton: $white;
-$whiteButtonHover: darken($whiteButton, 10%);
-$whiteButtonDisabled: darken($whiteButton, 20%);
-$errorButton: $red;
+$defaultButton: $white;
+$defaultButtonHover: darken($defaultButton, 10%);
+$defaultButtonDisabled: darken($defaultButton, 20%);
+$dangerButton: $red;
 $grayBorder: $lightGray;
+$blueBorder: $blue;
 $teamCard: $white;
-$teamCardHover: darken($teamCard, 5%)
+$teamCardHover: darken($teamCard, 5%);

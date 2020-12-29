@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Link, withRouter, useHistory, Redirect } from "react-router-dom";
 import { useAuth } from "../common/provider/AuthProvider";
 import { SignInPath, HomePath, ProfileNewPath } from "../routes";
+import { BoldText } from "../components/atoms/Text";
+import { TextBox } from "../components/atoms/TextBox";
+import { Button } from "../components/atoms/Button";
 
 export const SignUpScreen = withRouter(() => {
   const history = useHistory();
@@ -38,20 +41,20 @@ export const SignUpScreen = withRouter(() => {
 
   return (
     <div>
-      <div>SignUp</div>
-      {hasSignUpError && <div>登録に失敗しました。</div>}
-      {hasEmailAlreadyInUseError && <div>既に登録されているメールアドレスです。</div>}
-      {hasInvalidEmailError && <div>不正なメールアドレスです。</div>}
+      <BoldText>SignUp</BoldText>
+      {hasSignUpError && <BoldText>登録に失敗しました。</BoldText>}
+      {hasEmailAlreadyInUseError && <BoldText>既に登録されているメールアドレスです。</BoldText>}
+      {hasInvalidEmailError && <BoldText>不正なメールアドレスです。</BoldText>}
       <div>
-        <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="メールアドレスを入力" />
+        <TextBox type="email" onChange={(e) => setEmail(e.target.value)} placeholder="メールアドレスを入力" />
       </div>
       <div>
-        <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="パスワードを入力" />
+        <TextBox type="password" onChange={(e) => setPassword(e.target.value)} placeholder="パスワードを入力" />
       </div>
       <div>
-        <button type="submit" onClick={handleCreateUser} disabled={loading}>
+        <Button theme="primary" onClick={handleCreateUser} disabled={loading}>
           {loading ? "loading..." : "新規登録"}
-        </button>
+        </Button>
       </div>
       ---
       <div>
