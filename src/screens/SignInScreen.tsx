@@ -7,7 +7,6 @@ import { NormalText } from "../components/atoms/Text";
 import { TextBox } from "../components/atoms/TextBox";
 import { Button } from "../components/atoms/Button";
 import { TextButton } from "../components/atoms/TextButton";
-import { toast } from "react-toastify";
 
 export const SignInScreen = withRouter(() => {
   const history = useHistory();
@@ -15,17 +14,19 @@ export const SignInScreen = withRouter(() => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   if (user) return <Redirect to={HomePath} />;
 
   const handleSignIn = async () => {
     setLoading(true);
+    setErrorMessage("");
     try {
       await signInWithEmailAndPassword(email, password);
       setLoading(false);
       history.push(HomePath);
     } catch (e) {
-      toast.error("サインインに失敗しました");
+      setErrorMessage("サインインに失敗しました");
       setLoading(false);
       return;
     }
@@ -35,16 +36,17 @@ export const SignInScreen = withRouter(() => {
     <div className={styles.container}>
       <div className={styles.form}>
         <NormalText className={styles.title}>サインイン</NormalText>
+        {errorMessage && <NormalText className={styles.errorMessage} theme="danger">{errorMessage}</NormalText>}
         <TextBox
           className={styles.emailInput}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="メールアドレスを入力"
+          placeholder="メールアドレスを入力..."
         />
         <TextBox
           className={styles.passwordInput}
           type="password"
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="パスワードを入力"
+          placeholder="パスワードを入力..."
         />
         <Button
           className={styles.signInButton}
