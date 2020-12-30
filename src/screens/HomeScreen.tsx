@@ -37,7 +37,7 @@ export const HomeScreen = () => {
         <div className={styles.contentAll}>
           <div className={styles.header}>
             <BoldText className={styles.title}>チームリスト</BoldText>
-            <Button theme="primary" onClick={openModal}>
+            <Button className={styles.teamCreateButton} theme="primary" onClick={openModal}>
               チーム作成する
             </Button>
           </div>

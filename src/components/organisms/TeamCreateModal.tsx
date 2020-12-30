@@ -20,8 +20,8 @@ export const TeamCreateModal: FC<Props> = ({ onCancel }) => {
           <TextBox placeholder="チーム名を入力してください..." />
         </div>
         <div className={styles.buttons}>
-          <Button onClick={onCancel}>キャンセル</Button>
-          <Button theme="primary" onClick={() => null}>
+          <Button className={styles.button} onClick={onCancel}>キャンセル</Button>
+          <Button className={styles.button} theme="primary" onClick={() => null}>
             作成する
           </Button>
         </div>
