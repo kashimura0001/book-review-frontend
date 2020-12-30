@@ -4,13 +4,13 @@ import styles from "./Button.module.scss";
 
 type ButtonTheme = "default" | "primary";
 
-const getButtonThemeStyle = (theme: ButtonTheme | undefined) => {
+const style = (theme: ButtonTheme | undefined) => {
   switch (theme) {
     case "primary":
-      return styles.primaryButton;
+      return styles.primary;
     case "default":
     default:
-      return styles.defaultButton;
+      return styles.default;
   }
 };
 
@@ -23,11 +23,8 @@ type Props = {
   onClick: (e: MouseEvent<HTMLButtonElement>) => void;
 };
 
-export const Button: FC<Props> = ({ id, name, theme, className, disabled, onClick, children }) => {
-  const buttonStyle = getButtonThemeStyle(theme);
-  return (
-    <button id={id} name={name} className={cn(buttonStyle, className)} disabled={disabled} onClick={onClick}>
-      {children}
-    </button>
-  );
-};
+export const Button: FC<Props> = ({ id, name, theme, className, disabled, onClick, children }) => (
+  <button id={id} name={name} className={cn(style(theme), className)} disabled={disabled} onClick={onClick}>
+    {children}
+  </button>
+);

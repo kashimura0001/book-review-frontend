@@ -1,6 +1,6 @@
 @import "../../constants/colors.scss";
 
-@mixin button {
+@mixin baseStyle {
   align-items: center;
   border-radius: 10px;
   display: flex;
@@ -11,8 +11,8 @@
   width: 100%;
 }
 
-.defaultButton {
-  @include button;
+.default {
+  @include baseStyle;
   background-color: $defaultButton;
   border: 2px solid $grayBorder;
   color: $defaultText;
@@ -26,8 +26,8 @@
   }
 }
 
-.primaryButton {
-  @include button;
+.primary {
+  @include baseStyle;
   background-color: $primaryButton;
   color: $whiteText;
 
