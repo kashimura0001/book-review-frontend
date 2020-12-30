@@ -66,7 +66,7 @@ export const SignUpScreen = withRouter(() => {
         >
           {loading ? "loading..." : "登録"}
         </Button>
-        <TextButton className={styles.signInTextLink} theme="primary" onClick={() => history.push(SignInPath)}>
+        <TextButton className={styles.signInPageLink} theme="primary" onClick={() => history.push(SignInPath)}>
           サインインはこちら
         </TextButton>
       </div>

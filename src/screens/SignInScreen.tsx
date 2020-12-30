@@ -28,7 +28,6 @@ export const SignInScreen = withRouter(() => {
     } catch (e) {
       setErrorMessage("サインインに失敗しました");
       setLoading(false);
-      return;
     }
   };
 
@@ -36,7 +35,11 @@ export const SignInScreen = withRouter(() => {
     <div className={styles.container}>
       <div className={styles.form}>
         <NormalText className={styles.title}>サインイン</NormalText>
-        {errorMessage && <NormalText className={styles.errorMessage} theme="danger">{errorMessage}</NormalText>}
+        {errorMessage && (
+          <NormalText className={styles.errorMessage} theme="danger">
+            {errorMessage}
+          </NormalText>
+        )}
         <TextBox
           className={styles.emailInput}
           onChange={(e) => setEmail(e.target.value)}
@@ -57,13 +60,13 @@ export const SignInScreen = withRouter(() => {
           {loading ? "loading..." : "サインイン"}
         </Button>
         <TextButton
-          className={styles.passwordResetButton}
+          className={styles.passwordResetPageLink}
           theme="primary"
           onClick={() => history.push(PasswordResetPath)}
         >
           パスワードをお忘れの方はこちら
         </TextButton>
-        <TextButton className={styles.signUpButton} theme="primary" onClick={() => history.push(SignUpPath)}>
+        <TextButton className={styles.signUpPageLink} theme="primary" onClick={() => history.push(SignUpPath)}>
           未登録の方はこちら
         </TextButton>
       </div>
