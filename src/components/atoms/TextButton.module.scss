@@ -1,7 +1,6 @@
 @import "../../constants/colors.scss";
 
-@mixin textButton {
-  color: $defaultText;
+@mixin baseStyle {
   outline: none;
 
   &:hover {
@@ -9,11 +8,17 @@
   }
 }
 
-.defaultTextButton {
-  @include textButton;
+.default {
+  @include baseStyle;
+  color: $defaultText;
 }
 
-.primaryTextButton {
-  @include textButton;
-  color: $link;
+.primary {
+  @include baseStyle;
+  color: $primaryText;
+}
+
+.danger {
+  @include baseStyle;
+  color: $dangerText;
 }

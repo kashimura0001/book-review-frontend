@@ -2,15 +2,17 @@ import React, { MouseEvent, FC } from "react";
 import styles from "./TextButton.module.scss";
 import cn from "classnames";
 
-type TextButtonTheme = "default" | "primary";
+type TextButtonTheme = "default" | "primary" | "danger";
 
-const getTextButtonThemeStyle = (theme: TextButtonTheme | undefined) => {
+const style = (theme: TextButtonTheme | undefined) => {
   switch (theme) {
     case "primary":
-      return styles.primaryTextButton;
+      return styles.primary;
+    case "danger":
+      return styles.danger;
     case "default":
     default:
-      return styles.defaultTextButton;
+      return styles.default;
   }
 };
 
@@ -22,11 +24,8 @@ type Props = {
   onClick: (e: MouseEvent<HTMLButtonElement>) => void;
 };
 
-export const TextButton: FC<Props> = ({ id, name, theme, className, onClick, children }) => {
-  const textButtonTheme = getTextButtonThemeStyle(theme);
-  return (
-    <button id={id} name={name} className={cn(textButtonTheme, className)} onClick={onClick}>
-      {children}
-    </button>
-  );
-};
+export const TextButton: FC<Props> = ({ id, name, theme, className, onClick, children }) => (
+  <button id={id} name={name} className={cn(style(theme), className)} onClick={onClick}>
+    {children}
+  </button>
+);
