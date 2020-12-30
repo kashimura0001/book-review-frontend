@@ -1,16 +1,25 @@
 @import "../../constants/colors";
 
-.lighterText {
+.default {
   color: $defaultText;
+}
+
+.primary {
+  color: $primaryText
+}
+
+.danger {
+  color: $dangerText
+}
+
+.lighter {
   font-weight: lighter;
 }
 
-.normalText {
-  color: $defaultText;
+.normal {
   font-weight: normal;
 }
 
-.boldText {
-  color: $defaultText;
+.bold {
   font-weight: bold;
 }
