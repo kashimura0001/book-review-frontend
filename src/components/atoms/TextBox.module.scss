@@ -15,4 +15,8 @@
   &:focus {
     border: 1px solid $blueBorder;
   }
+
+  &:disabled {
+    background-color: $textBoxDisabled;
+  }
 }

@@ -44,7 +44,7 @@ export const HomeScreen = () => {
           <div className={styles.teams}>
             {teams.map((team, index) => {
               return (
-                <div className={styles.teamCard}>
+                <div className={styles.teamCard} key={index}>
                   <TeamCard name={team.name} memberCount={team.membersCount} onClick={() => null} />
                 </div>
               );

@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 180px;
+}
+
+.form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+}
+
+.errorMessage {
+  margin-top: 40px;
+}
+
+.title {
+  font-size: 24px;
+}
+
+.nameInput {
+  margin-top: 30px;
+}
+
+.emailInput {
+  margin-top: 30px;
+}
+
+.subjectButton {
+  margin-top: 30px;
+}

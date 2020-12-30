@@ -14,6 +14,7 @@ $defaultText: $gray;
 $primaryText: $blue;
 $dangerText: $red;
 $whiteText: $white;
+$textBoxDisabled: darken($white, 20%);
 $placeholder: $lightGray;
 $primaryButton: $blue;
 $primaryButtonHover: darken($primaryButton, 10%);
