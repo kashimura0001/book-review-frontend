@@ -21,7 +21,7 @@ type Props = {
 
 export const Modal: FC<Props> = ({ onOutsideClick, children }) => {
   return (
-    <ReactModal isOpen style={customStyles}>
+    <ReactModal isOpen style={customStyles} ariaHideApp={false}>
       <OutsideClickHandler onOutsideClick={onOutsideClick || (() => null)}>{children}</OutsideClickHandler>
     </ReactModal>
   );
