@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styles from "./SignUpScreen.module.scss";
-import { withRouter, useHistory, Redirect } from "react-router-dom";
+import { withRouter, useHistory } from "react-router-dom";
 import { useAuth } from "../common/provider/AuthProvider";
-import { SignInPath, HomePath, ProfileNewPath } from "../routes";
+import { SignInPath, ProfileNewPath } from "../routes";
 import { NormalText } from "../components/atoms/Text";
 import { TextBox } from "../components/atoms/TextBox";
 import { Button } from "../components/atoms/Button";
@@ -10,13 +10,11 @@ import { TextButton } from "../components/atoms/TextButton";
 
 export const SignUpScreen = withRouter(() => {
   const history = useHistory();
-  const { user, signUpWithEmailAndPassword } = useAuth();
+  const { signUpWithEmailAndPassword } = useAuth();
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
-  if (user) return <Redirect to={HomePath} />;
 
   const handleCreateUser = async () => {
     setLoading(true);
