@@ -1,4 +1,4 @@
-# Bukure frontend
+# Book review frontend
 ## Setup
 ```
 $ yarn
